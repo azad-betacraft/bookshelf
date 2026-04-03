@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :authors, only: %i[index show create update destroy] do
-      resources :books, only: [:index], controller: "author_books"
+      resources :books, only: %i[index], controller: "author_books"
     end
 
     resources :books, only: %i[index show create update destroy]
