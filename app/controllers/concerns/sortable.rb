@@ -6,7 +6,8 @@ module Sortable
   def apply_sort(scope, allowed_fields, default_field)
     s = sort_params(allowed_fields, default_field)
     if s[:field] == "book_count"
-      scope.order(Arel.sql("book_count #{s[:order]}"))
+      direction = s[:order] == "desc" ? "DESC" : "ASC"
+      scope.order(Arel.sql("book_count #{direction}")) # brakeman:ignore
     else
       scope.order(s[:field] => s[:order])
     end
